@@ -15,17 +15,16 @@ header {
 
 hr {
   border: none;
-  border-top: 2px solid #003366; /* Navy blue line */
+  border-top: 2px solid #003366;
   margin: 2em 0;
 }
-
 
 main {
   padding: 2em;
   max-width: 900px;
   margin: auto;
   background: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
@@ -41,11 +40,19 @@ h1, h2 {
   margin-bottom: 0.75em;
 }
 
+/* =================== */
+/* Gallery + Captions  */
+/* =================== */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1em;
   margin-top: 2em;
+}
+
+.gallery figure {
+  margin: 0;
+  text-align: center;
 }
 
 .gallery img {
@@ -54,6 +61,14 @@ h1, h2 {
   border: 2px solid #ddd;
   border-radius: 6px;
 }
+
+.gallery figcaption {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* =================== */
 
 footer {
   background: #003366;
