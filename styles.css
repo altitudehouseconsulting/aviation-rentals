@@ -13,6 +13,13 @@ header {
   text-align: center;
 }
 
+hr {
+  border: none;
+  border-top: 2px solid #003366; /* Navy blue line */
+  margin: 2em 0;
+}
+
+
 main {
   padding: 2em;
   max-width: 900px;
