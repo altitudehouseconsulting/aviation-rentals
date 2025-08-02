@@ -68,6 +68,16 @@ h1, h2 {
   color: #555;
 }
 
+figure {
+  text-align: center;
+  margin: 0;
+}
+
+figcaption {
+  margin-bottom: 0.5em; /* Space below caption */
+  font-size: 0.9em;
+  color: #555;
+}
 /* =================== */
 
 footer {
