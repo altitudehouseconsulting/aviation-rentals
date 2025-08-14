@@ -1,157 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Altitude Aviation Rentals</title>
-  <link rel="stylesheet" href="styles.css" />
+  <head>
+    <!--
+      =============================================================
+      Altitude Aviation Rentals — Image‑First Landing Page
+      -------------------------------------------------------------
+      • Single‑file HTML (no external deps); inline CSS + tiny JS
+      • Mirrors the look & feel of your Property/Home Repair page
+      • Aviation‑themed imagery, copy, and sections
+      • Mobile‑first, accessible, image‑forward
+      • Uses cool‑blue brand palette (tweak CSS variables as needed)
+      • Heavily commented per your preference
+
+      Deployment tips:
+      1) Save as index.html in your aviation‑rentals repo.
+      2) Replace placeholder images (use your photos or stock) and TODOs.
+      3) Update contact links, phone, and booking process.
+      4) Optional: Point your domain to GitHub Pages.
+      =============================================================
+    -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Altitude Aviation Rentals — Student Housing & Short‑Stay Rooms</title>
+    <meta name="description" content="Private rooms for aviation students and short‑stay flight trainees. Clean, quiet, fully furnished, utilities & Wi‑Fi included." />
+
+    <!-- ========== Brand & Theme Variables ========== -->
+    <style>
+      :root{
+        /* === Blues to match Altitude branding === */
+        --brand-900:#0b1f4a; /* deep navy */
+        --brand-800:#132b63; /* indigo navy */
+        --brand-700:#1e3a8a; /* indigo */
+        --brand-600:#2148a3; /* royal blue */
+        --brand-500:#2563eb; /* bright blue */
+        --brand-400:#3b82f6; /* light blue */
+        --brand-300:#60a5fa; /* sky */
+        --cyan-500:#0ea5e9;  /* accent */
+        /* === Neutrals === */
+        --ink-900:#0f172a; --ink-700:#334155; --ink-600:#475569; --ink-500:#64748b; --ink-300:#cbd5e1; --ink-200:#e2e8f0;
+        --surface:#ffffff; --bg:#f8fafc;
+        /* === Radii & Shadows === */
+        --radius-xl: 18px; --radius-lg: 14px; --radius-md: 10px;
+        --shadow-lg: 0 20px 40px rgba(2,6,23,0.12);
+        --shadow-md: 0 10px 20px rgba(2,6,23,0.10);
+        --shadow-sm: 0 4px 10px rgba(2,6,23,0.08);
+        /* === Layout === */
+        --container: 1180px;
+      }
+
+      /* ===== Base ===== */
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink-700);background:var(--bg);line-height:1.6}
+      img{max-width:100%;display:block;border-radius:var(--radius-lg)}
+      a{color:var(--brand-600);text-decoration:none}
+      a:hover{text-decoration:underline}
+      .container{width:92%;max-width:var(--container);margin-inline:auto}
+      .btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;padding:.9rem 1.2rem;font-weight:600;text-decoration:none;transition:transform .06s ease,box-shadow .2s ease}
+      .btn:hover{transform:translateY(-1px);text-decoration:none}
+      .btn-primary{background:linear-gradient(135deg,var(--brand-600),var(--brand-400));color:#fff;box-shadow:var(--shadow-md)}
+      .btn-outline{border:1.5px solid var(--brand-300);color:var(--brand-700);background:#fff}
+      .tag{display:inline-block;padding:.35rem .7rem;border-radius:999px;background:linear-gradient(135deg,var(--brand-200),#e0f2fe);color:var(--brand-700);font-weight:600;font-size:.85rem}
+
+      /* ===== Header / Nav ===== */
+      header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(8px);background:rgba(255,255,255,.85);border-bottom:1px solid var(--ink-200)}
+      .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+      .brand{display:flex;align-items:center;gap:.8rem;font-weight:800;letter-spacing:.1px;color:var(--brand-700)}
+      .brand .logo{width:42px;height:42px;border-radius:12px;background:conic-gradient(from 210deg at 50% 50%,var(--brand-400),var(--brand-700),var(--cyan-500));box-shadow:inset 0 0 0 2px rgba(255,255,255,.7),var(--shadow-sm)}
+      .nav-links{display:flex;gap:1rem;align-items:center}
+      .nav-cta{display:none}
+      .hamburger{display:none;border:0;background:transparent}
+      .hamburger span{display:block;width:26px;height:3px;background:var(--brand-700);margin:.32rem 0;border-radius:3px}
+      @media (max-width:900px){.nav-links{display:none}.nav-cta{display:none}.hamburger{display:block}#mobileMenu{display:none;position:absolute;inset:100% 0 auto 0;background:#fff;border-bottom:1px solid var(--ink-200);box-shadow:var(--shadow-sm)}#mobileMenu a{display:block;padding:1rem 1.2rem;border-bottom:1px solid var(--ink-200)}}
+
+      /* ===== Hero ===== */
+      .hero{position:relative;padding:5rem 0 3rem;overflow:clip}
+      .hero::before{content:"";position:absolute;inset:0;background:
+        linear-gradient(180deg,rgba(11,31,74,.78) 10%,rgba(11,31,74,.40) 45%,rgba(248,250,252,.0) 100%),
+        url('https://images.unsplash.com/photo-1519751138087-5a3a1f0b0a4b?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat; /* TODO: Replace with your own runway/aircraft photo */
+        filter:saturate(1.05)}
+      .hero .content{position:relative;color:#fff;padding-top:1.25rem}
+      .eyebrow{font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;opacity:.92}
+      h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin:.4rem 0 1rem;color:#fff}
+      .lead{font-size:clamp(1rem,1.6vw,1.2rem);color:#eef2ff;max-width:60ch}
+      .hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.1rem}
+      .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+      .stat{background:rgba(255,255,255,.85);color:var(--ink-700);border-radius:var(--radius-xl);padding:1rem 1.2rem;box-shadow:var(--shadow-sm);backdrop-filter:blur(6px)}
+      .stat .num{font-weight:800;font-size:1.3rem;color:var(--brand-700)}
+      .stat .lbl{font-size:.9rem;color:var(--ink-600)}
+      @media (max-width:700px){.hero{padding:4.2rem 0 2rem}.hero-stats{grid-template-columns:1fr}}
+
+      /* ===== Sections ===== */
+      section{padding:3.2rem 0}
+      h2{font-size:clamp(1.6rem,3vw,2.25rem);line-height:1.2;margin:0 0 .6rem;color:var(--ink-900)}
+      .sub{color:var(--ink-600);max-width:65ch}
+
+      /* ===== Cards grid (Rooms/Amenities) ===== */
+      .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.6rem}
+      .card{background:#fff;border:1px solid var(--ink-200);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .15s ease,box-shadow .2s ease}
+      .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+      .card .media{aspect-ratio:4/3;overflow:hidden}
+      .card .body{padding:1rem 1.1rem 1.2rem}
+      .card h3{margin:.2rem 0 .4rem;font-size:1.15rem;color:var(--ink-900)}
+      .card p{margin:0;font-size:.98rem;color:var(--ink-600)}
+      .pill{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;background:#eef2ff;color:var(--brand-700);padding:.35rem .6rem;border-radius:999px;font-weight:600}
+      @media (max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+      @media (max-width:620px){.grid{grid-template-columns:1fr}}
+
+      /* ===== Before/After (Room refresh or upgrade) ===== */
+      .ba-wrap{margin-top:1.8rem;display:grid;grid-template-columns:1.1fr .9fr;gap:1.4rem;align-items:center}
+      .ba-box{position:relative;border-radius:var(--radius-xl);overflow:hidden;border:1px solid var(--ink-200);box-shadow:var(--shadow-md)}
+      .ba-box img{width:100%;height:100%;object-fit:cover}
+      .ba-before{position:absolute;inset:0}
+      .ba-after{position:absolute;inset:0;clip-path:inset(0 0 0 50%)}
+      .ba-slider{position:absolute;left:0;right:0;bottom:0;padding:1rem;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.35) 100%)}
+      .ba-slider input[type=range]{width:100%;accent-color:var(--brand-500)}
+      .ba-handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+      .ba-labels{position:absolute;inset:12px auto auto 12px;display:flex;gap:.5rem}
+      @media (max-width:900px){.ba-wrap{grid-template-columns:1fr}}
+
+      /* ===== Filterable Gallery ===== */
+      .filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+      .filter-btn{border:1px solid var(--ink-300);background:#fff;border-radius:999px;padding:.5rem .9rem;cursor:pointer;font-weight:600}
+      .filter-btn[aria-pressed="true"]{background:linear-gradient(135deg,var(--brand-600),var(--brand-400));color:#fff;border-color:transparent}
+      .gallery{margin-top:1rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
+      .gallery figure{margin:0;background:#fff;padding:.5rem;border:1px solid var(--ink-200);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
+      .gallery figcaption{font-size:.92rem;color:var(--ink-600);margin-top:.5rem}
+      @media (max-width:1100px){.gallery{grid-template-columns:repeat(3,1fr)}}
+      @media (max-width:800px){.gallery{grid-template-columns:repeat(2,1fr)}}
+      @media (max-width:520px){.gallery{grid-template-columns:1fr}}
+
+      /* ===== Testimonials ===== */
+      .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.2rem}
+      .quote{background:#fff;border:1px solid var(--ink-200);border-radius:var(--radius-xl);padding:1.1rem;box-shadow:var(--shadow-sm)}
+      .quote p{margin:.2rem 0 .8rem}
+      .avatar{display:flex;align-items:center;gap:.6rem}
+      .avatar img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+      .avatar .name{font-weight:700;color:var(--ink-900)}
+      .avatar .role{font-size:.9rem;color:var(--ink-600)}
+      @media (max-width:900px){.testimonials{grid-template-columns:1fr}}
+
+      /* ===== Footer ===== */
+      footer{padding:2rem 0 2.6rem;color:var(--ink-600)}
+      .footer-grid{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center}
+      @media (max-width:800px){.footer-grid{grid-template-columns:1fr;text-align:center}}
+      .socials a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#fff;border:1px solid var(--ink-200);box-shadow:var(--shadow-sm);margin-right:.4rem}
+
+      /* ===== Accessibility: focus rings ===== */
+      :focus-visible{outline:3px solid var(--cyan-500);outline-offset:2px;border-radius:6px}
+    </style>
   </head>
   <body>
+    <!-- ========== Header & Navigation ========== -->
+    <header>
+      <div class="container nav" role="navigation" aria-label="Main">
+        <a class="brand" href="#top" aria-label="Go to top">
+          <div class="logo" aria-hidden="true"></div>
+          <span>Altitude Aviation Rentals</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#rooms">Rooms</a>
+          <a href="#amenities">Amenities</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#policies">Policies</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="nav-cta">
+          <!-- TODO: Replace phone/email with real contact info -->
+          <a class="btn btn-outline" href="mailto:AltitudeHouseConsultingLLC@gmail.com?subject=Aviation%20Rentals%20Inquiry">Email</a>
+          <a class="btn btn-primary" href="#booking">Check Availability</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="container" role="menu" aria-label="Mobile">
+        <a href="#rooms" role="menuitem">Rooms</a>
+        <a href="#amenities" role="menuitem">Amenities</a>
+        <a href="#gallery" role="menuitem">Gallery</a>
+        <a href="#policies" role="menuitem">Policies</a>
+        <a href="#contact" role="menuitem">Contact</a>
+        <div style="padding:.8rem 1.2rem;display:flex;gap:.6rem;">
+          <a class="btn btn-outline" href="mailto:AltitudeHouseConsultingLLC@gmail.com?subject=Aviation%20Rentals%20Inquiry">Email</a>
+          <a class="btn btn-primary" href="#booking">Check Availability</a>
+        </div>
+      </div>
+    </header>
 
-<header>
-  <h1>Altitude Aviation Rentals</h1>
-  <p>Furnished Communal Housing for Aviation Students and Faculty. Minutes from Sanford International Airport</p>
- </header>
+    <!-- ========== Hero ========== -->
+    <section class="hero" id="top" aria-label="Hero">
+      <div class="container content">
+        <span class="eyebrow">Student Housing • Short‑Stay Rooms • Near Airports</span>
+        <h1>Quiet, furnished rooms for flight training and aviation careers.</h1>
+        <p class="lead">Stay close to the airport with reliable Wi‑Fi, study‑friendly spaces, and flexible month‑to‑month options designed for pilots in training.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#booking">Check Availability</a>
+          <a class="btn btn-outline" href="#gallery">See the Spaces</a>
+        </div>
+        <div class="hero-stats" role="list" aria-label="Key stats">
+          <div class="stat" role="listitem"><div class="num"><strong>10 min</strong></div><div class="lbl">Avg. drive to training airports*</div></div>
+          <div class="stat" role="listitem"><div class="num"><strong>$850–$950</strong></div><div class="lbl">Typical monthly rate (all in)</div></div>
+          <div class="stat" role="listitem"><div class="num"><strong>Wi‑Fi 300+ Mbps</strong></div><div class="lbl">Fast & stable internet</div></div>
+        </div>
+        <!-- * TODO: Update with your true drive times and nearby airports (e.g., KSFB, etc.) -->
+      </div>
+    </section>
 
-  <main>
-  <h2>Welcome Aviation Enthusiasts!!!</h2>
-  <p>
-  Looking for affordable, all-inclusive housing near <strong>Sanford International Airport (SFB)</strong>? Aspiring Aviators and Aviation Professional fully furnished communal rentals just 5 miles or less from the SFB airport.
-  </p>
+    <!-- ========== Rooms (Cards) ========== -->
+    <section id="rooms" aria-labelledby="rooms-h">
+      <div class="container">
+        <span class="tag">Rooms</span>
+        <h2 id="rooms-h">Private rooms designed for focus and rest.</h2>
+        <p class="sub">Fully furnished rooms with study desks, blackout curtains, clean linens, and shared access to stocked kitchens and laundry.</p>
+        <div class="grid" role="list">
+          <!-- Room 1 -->
+          <article class="card" role="listitem">
+            <div class="media">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1200&auto=format&fit=crop" alt="Bright bedroom with desk and queen bed" />
+            </div>
+            <div class="body">
+              <span class="pill">Standard Room</span>
+              <h3>Queen Bed + Desk</h3>
+              <p>Comfortable queen bed, workspace, dresser, and closet. Fresh linens and weekly common‑area cleaning.</p>
+            </div>
+          </article>
+          <!-- Room 2 -->
+          <article class="card" role="listitem">
+            <div class="media">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1505692794403-34d4982f88aa?q=80&w=1200&auto=format&fit=crop" alt="Minimalist room with natural light and workspace" />
+            </div>
+            <div class="body">
+              <span class="pill">Quiet Corner</span>
+              <h3>Study‑Focused Layout</h3>
+              <p>Blackout curtains, lamp lighting, and ergonomic chair for late‑night ground school prep.</p>
+            </div>
+          </article>
+          <!-- Room 3 -->
+          <article class="card" role="listitem">
+            <div class="media">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1200&auto=format&fit=crop" alt="Cozy room with clean bedding and storage" />
+            </div>
+            <div class="body">
+              <span class="pill">Premium</span>
+              <h3>Extra Space + Storage</h3>
+              <p>Larger footprint for longer stays, extra shelving, and near‑bathroom access.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:altitudehouseconsultingllc@gmail.com">altitudehouseconsultingllc@gmail.com</a></p>
-    <p>Voice Mail/Text: <a href="tel:+14077921463">(407) 792-1463 or (770) 722-2479</a></p>
-    
-    <ul class="features">
-      <li><strong><i>Private Rooms with Bed, Desk, TV, and Office Chair</i></strong></li>
-      <li><strong><i>Kitchenware, Linens, and Towels Available</i></strong></li>
-      <li><strong><i>All Utilities and WiFi Included</i></strong></li>
-      <li><strong><i>Month-to-Month & Transient Aviator Agreements</i></strong></li>
-      <li><strong><i>Prices Range from $850-$950/month to month or $64-$71/daily</i></strong></li>
-      <li><strong><i>30-day Vacate Notice Required for Month to Month Agreements</i></strong></li>
-      <li><strong><i>Refundable Security Deposit</i></strong></li>
-      <li><strong><i>Renter’s Insurance Required for Month to Month Tenants</i></strong></li>
-      <li><strong><i>Rent Concessions at Manager’s discretion</i></strong></li>
-    </ul>
- 
-      <hr> <!-- Insert Here -->   
-      <h2>Celery Ave</h2>
-    <div class="gallery">
+    <!-- ========== Amenities (Cards) ========== -->
+    <section id="amenities" aria-labelledby="amenities-h">
+      <div class="container">
+        <span class="tag">Amenities</span>
+        <h2 id="amenities-h">Everything you need for training and rest.</h2>
+        <p class="sub">Utilities and Wi‑Fi included. Kitchens stocked with cookware. Laundry on‑site. Clean, quiet, and respectful house culture.</p>
+        <div class="grid" role="list">
+          <article class="card" role="listitem">
+            <div class="media">
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop" alt="Modern kitchen with cookware and seating" />
+            </div>
+            <div class="body">
+              <span class="pill">Kitchen</span>
+              <h3>Stocked for Meal Prep</h3>
+              <p>Cookware, dishes, and basic appliances ready for quick meals between simulator sessions.</p>
+            </div>
+          </article>
+          <article class="card" role="listitem">
+            <div class="media">
+              <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop" alt="Laundry machines" />
+            </div>
+            <div class="body">
+              <span class="pill">Laundry</span>
+              <h3>On‑Site Washers & Dryers</h3>
+              <p>No extra fees. Keep your uniform sharp and ready.</p>
+            </div>
+          </article>
+          <article class="card" role="listitem">
+            <div class="media">
+              <img src="https://images.unsplash.com/photo-1581093588401-a97c4b585fa7?q=80&w=1200&auto=format&fit=crop" alt="High‑speed Wi‑Fi router" />
+            </div>
+            <div class="body">
+              <span class="pill">Connectivity</span>
+              <h3>Fast, Stable Wi‑Fi</h3>
+              <p>Video briefings and flight planning without lag. Ethernet available in select rooms.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <figure>
-    <img src="images/bella_backyard.png" alt="">
-    <figcaption>Backyard</figcaption>
-  </figure>
-  
-  <figure>
-     <img src="images/bella_kitchen.png" alt="">
-    <figcaption>Kitchen</figcaption>
-  </figure>
+    <!-- ========== Featured Before/After (Room Refresh) ========== -->
+    <section aria-labelledby="ba-h">
+      <div class="container">
+        <span class="tag">Recent upgrade</span>
+        <h2 id="ba-h">Study room refresh — <em>new desk, lighting, and paint</em>.</h2>
+        <p class="sub">We continuously improve our spaces to support focused study and solid rest. Drag the slider to compare.</p>
+        <div class="ba-wrap">
+          <div class="ba-box" aria-label="Before and after comparison">
+            <img class="ba-before" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600&auto=format&fit=crop" alt="Before: older desk setup" />
+            <img class="ba-after"  src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1600&auto=format&fit=crop" alt="After: modern desk with lamp and chair" />
+            <div class="ba-handle" aria-hidden="true"></div>
+            <div class="ba-labels"><span class="pill" aria-hidden="true">Before</span><span class="pill" aria-hidden="true">After</span></div>
+            <div class="ba-slider" aria-hidden="true"><input id="baRange" type="range" min="0" max="100" value="50" aria-label="Reveal after image" /></div>
+          </div>
+          <div>
+            <h3>Comfort & Focus</h3>
+            <ul>
+              <li>Ergonomic chair and adjustable lamp</li>
+              <li>Fresh paint and blackout curtains</li>
+              <li>Ground‑school friendly work surface</li>
+            </ul>
+            <a class="btn btn-outline" href="#gallery">Browse More Photos</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <figure>
-    <img src="images/bella_laundry.png" alt="">
-    <figcaption>Laundry</figcaption>
-  </figure>
- 
-  <figure>
-    <img src="images/bella_common_area.png" alt="">
-    <figcaption>Common Area</figcaption>
-  </figure>
+    <!-- ========== Photo Gallery (filterable) ========== -->
+    <section id="gallery" aria-labelledby="gallery-h">
+      <div class="container">
+        <span class="tag">Photo gallery</span>
+        <h2 id="gallery-h">Spaces, amenities, and nearby aviation.</h2>
+        <p class="sub">Filter to see interiors, shared areas, or neighborhood scenes near training airports.</p>
+        <div class="filters" role="toolbar" aria-label="Gallery filters">
+          <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-btn" data-filter="interior">Interiors</button>
+          <button class="filter-btn" data-filter="shared">Shared Areas</button>
+          <button class="filter-btn" data-filter="neighborhood">Nearby</button>
+        </div>
+        <div class="gallery" id="galleryGrid">
+          <figure data-cat="interior">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?q=80&w=1200&auto=format&fit=crop" alt="Kitchen with modern appliances" />
+            <figcaption>Shared kitchen — stocked & clean</figcaption>
+          </figure>
+          <figure data-cat="interior">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1505692794403-34d4982f88aa?q=80&w=1200&auto=format&fit=crop" alt="Room with desk and bed" />
+            <figcaption>Standard room — queen bed + desk</figcaption>
+          </figure>
+          <figure data-cat="shared">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1200&auto=format&fit=crop" alt="Living room with couch and TV" />
+            <figcaption>Common area — quiet study hours</figcaption>
+          </figure>
+          <figure data-cat="neighborhood">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1517976487492-576ea6b2936b?q=80&w=1200&auto=format&fit=crop" alt="Runway with small aircraft" />
+            <figcaption>Nearby training field — short drive*</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
+    <!-- ========== Policies / Quick Facts ========== -->
+    <section id="policies" aria-labelledby="policies-h">
+      <div class="container">
+        <span class="tag">Quick facts</span>
+        <h2 id="policies-h">Simple, flexible stays for trainees.</h2>
+        <div class="grid" role="list">
+          <article class="card" role="listitem">
+            <div class="body">
+              <span class="pill">Included</span>
+              <h3>Utilities & Wi‑Fi</h3>
+              <p>All utilities and high‑speed Wi‑Fi included in rent. No surprise fees.</p>
+            </div>
+          </article>
+          <article class="card" role="listitem">
+            <div class="body">
+              <span class="pill">Terms</span>
+              <h3>Month‑to‑Month</h3>
+              <p>Flexible agreements with a refundable deposit (with 30‑day notice).* <!-- TODO: Replace with your exact policy --> </p>
+            </div>
+          </article>
+          <article class="card" role="listitem">
+            <div class="body">
+              <span class="pill">House Rules</span>
+              <h3>Respect & Quiet Hours</h3>
+              <p>We prioritize clean, quiet spaces conducive to study and early flight schedules.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <figure>
-    <img src="images/bella_bedroom_master.png" alt="">
-    <figcaption>Bedroom $950.00 Available</figcaption>
-  </figure>
+    <!-- ========== Booking CTA ========== -->
+    <section id="booking" class="cta" aria-labelledby="booking-h" style="position:relative;overflow:clip;">
+      <style>
+        .cta .box{position:relative;border-radius:var(--radius-xl);padding:1.4rem;background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(14,165,233,.12));border:1px solid var(--brand-200);box-shadow:var(--shadow-md)}
+        .cta .box::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(59,130,246,.25),rgba(59,130,246,0))}
+      </style>
+      <div class="container">
+        <div class="box">
+          <h2 id="booking-h">Ready to book or ask a question?</h2>
+          <p class="sub">Tell us your training dates, preferred room type, and any special needs. We’ll confirm availability fast.</p>
+          <div class="hero-cta" style="margin-top:.6rem;">
+            <!-- TODO: Swap with your preferred booking flow (email, form, Calendly, etc.) -->
+            <a class="btn btn-primary" href="mailto:AltitudeHouseConsultingLLC@gmail.com?subject=Aviation%20Rentals%20Availability&body=Hello%20Altitude%20Aviation%20Rentals%2C%0A%0AMy%20training%20dates%20are%3A%20_____%20to%20_____.%0APreferred%20room%3A%20Standard%20%7C%20Premium%20%7C%20Either.%0AQuestions%3A%20_____%0A%0AThanks!">Email Availability Request</a>
+            <a class="btn btn-outline" href="tel:+14075550182">Call/Text: 407‑555‑0182</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <figure>
-    <img src="images/bella_bathroom_master.png" alt="">
-    <figcaption>Bathroom Private</figcaption>
-  </figure>
+    <!-- ========== Testimonials ========== -->
+    <section id="testimonials" aria-labelledby="testimonials-h">
+      <div class="container">
+        <span class="tag">What guests say</span>
+        <h2 id="testimonials-h">Trusted by trainees and instructors.</h2>
+        <div class="testimonials" role="list">
+          <figure class="quote" role="listitem">
+            <p>“Clean room and reliable Wi‑Fi. Perfect for early lessons — quiet and close to the airport.”</p>
+            <figcaption class="avatar">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=256&auto=format&fit=crop" alt="Guest portrait" />
+              <div><div class="name">Riley P.</div><div class="role">Private pilot student</div></div>
+            </figcaption>
+          </figure>
+          <figure class="quote" role="listitem">
+            <p>“Month‑to‑month made it easy during my instrument training. Quiet hours respected.”</p>
+            <figcaption class="avatar">
+              <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=256&auto=format&fit=crop" alt="Guest portrait" />
+              <div><div class="name">Morgan S.</div><div class="role">Instrument rating</div></div>
+            </figcaption>
+          </figure>
+          <figure class="quote" role="listitem">
+            <p>“Straightforward, responsive, and professional. Would stay again for checkride prep.”</p>
+            <figcaption class="avatar">
+              <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=256&auto=format&fit=crop" alt="Guest portrait" />
+              <div><div class="name">Jamie L.</div><div class="role">CFI candidate</div></div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
-  <figure>
-    <img src="images/bella_bedroom_one.png" alt="">
-    <figcaption>Bedroom $875.00 Occupied</figcaption>
-  </figure>
+    <!-- ========== Footer ========== -->
+    <footer role="contentinfo">
+      <div class="container footer-grid">
+        <div>
+          <div class="brand" style="gap:.6rem;">
+            <div class="logo" aria-hidden="true"></div>
+            <div>
+              <strong>Altitude Aviation Rentals</strong><br />
+              <small>Student Housing & Short‑Stay Rooms</small>
+            </div>
+          </div>
+          <p style="margin:.6rem 0 0;">
+            <small>Serving: Central Florida training airports • © <span id="year"></span></small>
+          </p>
+        </div>
+        <div class="socials" aria-label="Social links">
+          <!-- TODO: Replace with your profiles -->
+          <a href="#" aria-label="Facebook">🔗</a>
+          <a href="#" aria-label="Instagram">🔗</a>
+          <a href="#" aria-label="LinkedIn">🔗</a>
+        </div>
+      </div>
+    </footer>
 
-  <figure>
-    <img src="images/bella_bedroom_two.png" alt="">
-    <figcaption>Bedroom $875.00 Available</figcaption>
-  </figure>
+    <!-- ========== Minimal JS ========== -->
+    <script>
+      // --- Mobile menu toggle ---
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+      hamburger?.addEventListener('click', () => {
+        const open = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = open ? 'none' : 'block';
+        hamburger.setAttribute('aria-expanded', String(!open));
+      });
+      mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        mobileMenu.style.display = 'none';
+        hamburger.setAttribute('aria-expanded', 'false');
+      }));
 
-  <figure>
-    <img src="images/bella_bedroom_three.png" alt="">
-    <figcaption>Bedroom $875.00 Available</figcaption>
-  </figure>
+      // --- Before/After slider logic ---
+      const baRange = document.getElementById('baRange');
+      const afterImg = document.querySelector('.ba-after');
+      const handle = document.querySelector('.ba-handle');
+      function updateBA(){
+        const v = Number(baRange.value); // 0..100
+        afterImg.style.clipPath = `inset(0 0 0 ${100 - v}%)`;
+        handle.style.left = `${v}%`;
+      }
+      baRange?.addEventListener('input', updateBA);
+      updateBA();
 
-  <figure>
-    <img src="images/bella_bathroom_shared.png" alt="">
-    <figcaption>Shared Bathroom</figcaption>
-  </figure>
-     </div>
-   <hr> <!-- Insert Here -->  
-      <h2>Mellonville Ave</h2>
-   <div class="gallery">
-  
-   <figure>
-    <img src="images/mellon_backyard.png" alt="">
-    <figcaption>Backyard</figcaption>
-  </figure>
+      // --- Filterable gallery ---
+      const buttons = document.querySelectorAll('.filter-btn');
+      const items = document.querySelectorAll('#galleryGrid figure');
+      buttons.forEach(btn => btn.addEventListener('click', () => {
+        const f = btn.dataset.filter;
+        buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        items.forEach(el => { el.style.display = (f === 'all' || el.dataset.cat === f) ? '' : 'none'; });
+      }));
 
-  <figure>
-    <img src="images/mellon_common_area.png" alt="">
-    <figcaption>Common Area</figcaption>
-  </figure>
-  
-  <figure>
-    <img src="images/mellon_kitchen.png" alt="">
-    <figcaption>Kitchen</figcaption>
-  </figure>
-
-  <figure>
-    <img src="images/mellon_laundry.png" alt="">
-    <figcaption>Laundry</figcaption>
-  </figure>
-      
-  <figure>
-    <img src="images/mellon_bedroom_one.png" alt="">
-    <figcaption>Bedroom $775.00 Occupied</figcaption>
-  </figure>
-
-  <figure>
-    <img src="images/mellon_bedroom_two.png" alt="">
-    <figcaption>Bedroom $850.00 Occupied</figcaption>
-  </figure>
-     
-
-  <figure>
-    <img src="images/mellon_bedroom_three.PNG" alt="">
-    <figcaption>Bedroom $900.00 Occupied</figcaption>
-  </figure>
-     
-  <figure>
-    <img src="images/mellon_bedroom_four.png" alt="">
-    <figcaption>Bedroom $875.00 Available</figcaption>
-  </figure>
-     
-  <figure>
-    <img src="images/mellon_bathroom_shared_one.png" alt="">
-    <figcaption>Shared Bath One</figcaption>
-  </figure>
-
-  <figure>
-    <img src="images/mellon_bathroom_shared_two.png" alt="">
-    <figcaption>Shared Bath Two</figcaption>
-  </figure>
-
-     
-    </div>
-  </main>
-
-  <footer>
-    &copy; 2025 Altitude House Consulting, LLC
-  </footer>
-
-</body>
+      // --- Dynamic year in footer ---
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
