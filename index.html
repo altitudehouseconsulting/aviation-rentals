@@ -6,17 +6,12 @@
       Altitude Aviation Rentals — Image‑First Landing Page
       -------------------------------------------------------------
       • Single‑file HTML (no external deps); inline CSS + tiny JS
-      • Mirrors the look & feel of your Property/Home Repair page
+      • Mirrors the look & feel of landing page
       • Aviation‑themed imagery, copy, and sections
       • Mobile‑first, accessible, image‑forward
       • Uses cool‑blue brand palette (tweak CSS variables as needed)
-      • Heavily commented per your preference
+      • Heavily commented for reference
 
-      Deployment tips:
-      1) Save as index.html in your aviation‑rentals repo.
-      2) Replace placeholder images (use your photos or stock) and TODOs.
-      3) Update contact links, phone, and booking process.
-      4) Optional: Point your domain to GitHub Pages.
       =============================================================
     -->
     <meta charset="utf-8" />
@@ -194,7 +189,7 @@
         </nav>
         <div class="nav-cta">
           <!-- TODO: Replace phone/email with real contact info -->
-          <a class="btn btn-outline" href="mailto:AltitudeHouseConsultingLLC@gmail.com?subject=Aviation%20Rentals%20Inquiry">Email</a>
+          <a class="btn btn-outline" href="mailto:altitudehouseconsultingllc@gmail.com?subject=Aviation%20Rentals%20Inquiry">Email</a>
           <a class="btn btn-primary" href="#booking">Check Availability</a>
         </div>
         <button class="hamburger" id="hamburger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
@@ -266,12 +261,12 @@
           <!-- Room 3 -->
           <article class="card" role="listitem">
             <div class="media">
-              <img loading="lazy" src="images/bella_master.png" alt="Cozy room with clean bedding and storage" />
+              <img loading="lazy" src="https://ap.rdcpix.com/2a8fcf36ea7776fbb1786657171f3c81l-b2972599051rd-w1280_h960.webp" alt="Cozy room with clean bedding and storage" />
             </div>
             <div class="body">
               <span class="pill">Premium</span>
-              <h3>Extra Space + Storage</h3>
-              <p>Larger footprint for longer stays, extra shelving, and near‑bathroom access.</p>
+              <h3>Extra Space</h3>
+              <p>Master suite with private bath</p>
             </div>
           </article>
         </div>
@@ -287,7 +282,7 @@
         <div class="grid" role="list">
           <article class="card" role="listitem">
             <div class="media">
-              <img src="images/bella_kitchen.png" alt="Modern kitchen with cookware and seating" />
+              <img src="https://ap.rdcpix.com/2a8fcf36ea7776fbb1786657171f3c81l-b1026686332rd-w1280_h960.webp" alt="Modern kitchen with cookware and seating" />
             </div>
             <div class="body">
               <span class="pill">Kitchen</span>
@@ -318,34 +313,6 @@
         </div>
       </div>
     </section>
-
-<!-- /*    <!-- ========== Featured Before/After (Room Refresh) ========== -->
-    <section aria-labelledby="ba-h">
-      <div class="container">
-        <span class="tag">Recent upgrade</span>
-        <h2 id="ba-h">Study room refresh — <em>new desk, lighting, and paint</em>.</h2>
-        <p class="sub">We continuously improve our spaces to support focused study and solid rest. Drag the slider to compare.</p>
-        <div class="ba-wrap">
-          <div class="ba-box" aria-label="Before and after comparison">
-            <img class="ba-before" src="" />
-            <img class="ba-after"  src="" alt="After: modern desk with lamp and chair" />
-            <div class="ba-handle" aria-hidden="true"></div>
-            <div class="ba-labels"><span class="pill" aria-hidden="true">Before</span><span class="pill" aria-hidden="true">After</span></div>
-            <div class="ba-slider" aria-hidden="true"><input id="baRange" type="range" min="0" max="100" value="50" aria-label="Reveal after image" /></div>
-          </div>
-          <div>
-            <h3>Comfort & Focus</h3>
-            <ul>
-              <li>Ergonomic chair and adjustable lamp</li>
-              <li>Fresh paint and blackout curtains</li>
-              <li>Ground‑school friendly work surface</li>
-            </ul>
-            <a class="btn btn-outline" href="#gallery">Browse More Photos</a>
-          </div>
-        </div>
-      </div>
-    </section>
-*/ -->
     <!-- ========== Photo Gallery (filterable) ========== -->
     <section id="gallery" aria-labelledby="gallery-h">
       <div class="container">
